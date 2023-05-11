@@ -30,6 +30,19 @@ app.get('/api/persons',(request,response) => {
     response.status(200).json(persons);
 });
 
+app.get('/api/persons/:id',(request,response)=> {
+    const id = Number(request.params.id);
+    const person = persons.find(p => p.id === id);
+
+    if(!person) {
+        return response.status(404).json({
+            error:'invalid id',
+        })
+    }
+
+    response.json(person);
+})
+
 app.get('/info',(request,response)=> {
     let info = `<p>Phonebook has info for ${persons.length} people</p>`;
     info = info.concat(`<p>${new Date()}</p>`);
