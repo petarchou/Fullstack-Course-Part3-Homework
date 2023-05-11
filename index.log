@@ -1,0 +1,14 @@
+[0mGET /api/persons/1 [36m304[0m 2.549 ms - -[0m
+[0mGET /api/persons/1 [36m304[0m 0.732 ms - -[0m
+[0mGET /api/persons/1 [36m304[0m 0.367 ms - -[0m
+[0mGET /api/persons/1 [36m304[0m 0.472 ms - -[0m
+[0mGET /api/persons/1 [36m304[0m 0.338 ms - -[0m
+[0mGET /api/persons/1 [36m304[0m 0.397 ms - -[0m
+[0mGET /api/persons/1 [36m304[0m 0.548 ms - -[0m
+[0mGET /api/persons/1 [36m304[0m 0.248 ms - -[0m
+[0mGET /api/persons/1 [36m304[0m 0.293 ms - -[0m
+[0mGET /api/persons/1 [36m304[0m 0.401 ms - -[0m
+[0mGET /api/persons/10 [33m404[0m 0.543 ms - 22[0m
+[0mGET /api/persons/1 [36m304[0m 0.320 ms - -[0m
+[0mGET /api/persons/2 [32m200[0m 0.416 ms - 55[0m
+[0mGET /api/persons/2 [36m304[0m 0.360 ms - -[0m
