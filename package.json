@@ -4,8 +4,8 @@
   "description": "The Node.js part of www.fullstackopen.com (part 3+)",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "@powershell if(Test-Path build) {Remove-Item -Recurse -Force build} && cd C:/Petar/Programming/JavaScript/FullStackCourse/React/Fullstack-Course/part02/phonebook && npm run build && @powershell Copy-Item build -Recurse C:/Petar/Programming/JavaScript/FullStackCourse/React/part03-node/Fullstack-Course_Node-Part",
     "deploy:render":"git add . && git commit -m \"Deploy from render script\" && git push",
