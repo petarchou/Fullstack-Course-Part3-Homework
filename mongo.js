@@ -44,8 +44,9 @@ function addContact() {
 
 function getAllContacts() {
     Address.find({}).then(result => {
-        result.forEach(address => {
-            console.log(address);
+        console.log('phonebook:');
+        result.forEach(contact => {
+            console.log(`${contact.name} ${contact.number}`);
         })
         mongoose.connection.close();
     })
