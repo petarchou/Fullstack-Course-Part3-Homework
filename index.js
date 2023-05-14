@@ -60,32 +60,24 @@ app.delete('/api/persons/:id', (request, response, next) => {
         .catch(err => next(err));
 })
 
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
     const { name, number } = request.body;
-
-    throwIfInvalidBody(name,number);
     
-    // const duplicateNameFlag = persons.map(person => person.name)
-    //     .findIndex(existingName => existingName === name);
-    // if (duplicateNameFlag !== -1) {
-    //     return response.status(400).json({
-    //         error: 'Name already exists'
-    //     })
-    // }
     const contact = new Contact({
         name,
         number,
     })
 
-    contact.save().then(contact => {
-        response.status(201).json(contact);
-    })
+    contact.save()
+        .then(contact => {
+            response.status(201).json(contact);
+        })
+        .catch(err => next(err));
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
     const id = request.params.id;
-    const {name, number} = request.body;
-    throwIfInvalidBody(name,number);
+    const { name, number } = request.body;
 
 
     const contact = {
@@ -93,15 +85,19 @@ app.put('/api/persons/:id', (request, response, next) => {
         number,
     }
 
-    Contact.findByIdAndUpdate(id,contact,{new: true})
-    .then(updatedContact => {
-        if(!updatedContact) {
-            throw new ElementNotFoundError(`Element with id ${id} does not exist`);
-        }
-
-        response.json(updatedContact);
+    Contact.findByIdAndUpdate(id, contact, {
+        new: true,
+        runValidators: true,
+        context: 'query',
     })
-    .catch(err => next(err));
+        .then(updatedContact => {
+            if (!updatedContact) {
+                throw new ElementNotFoundError(`Element with id ${id} does not exist`);
+            }
+
+            response.json(updatedContact);
+        })
+        .catch(err => next(err));
 })
 
 app.use((request, response) => {
@@ -109,15 +105,15 @@ app.use((request, response) => {
 })
 
 //Error Handling
-const errorHandler =(error, request, response, next) => {
+const errorHandler = (error, request, response, next) => {
     console.log(error.message);
     console.log(error.name);
-    if(error.name === 'CastError') {
-        return response.status(400).send({error:'malformed id'});
-    } else if(error.name === 'ElementNotFoundError') {
-        return response.status(404).send({error:'Invalid ID: element does not exist'});
-    } else if(error.name === 'InvalidArgumentError') {
-        return response.status(error.statusCode).send({error:error.message});
+    if (error.name === 'CastError') {
+        return response.status(400).send({ error: 'malformed id' });
+    } else if (error.name === 'ElementNotFoundError') {
+        return response.status(404).send({ error: 'Invalid ID: element does not exist' });
+    } else if (error.name === 'ValidationError') {
+        return response.status(400).json({error: error.message});
     }
 
     next(error);
