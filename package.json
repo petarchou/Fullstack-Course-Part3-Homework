@@ -8,8 +8,8 @@
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ui": "@powershell if(Test-Path build) {Remove-Item -Recurse -Force build} && cd ../../Fullstack-Course/part02/phonebook && npm run build && @powershell Copy-Item build -Recurse ../../../part03-node/Fullstack-Course_Node-Part",
-    "deploy:render":"git add . && git commit -m \"Deploy from render script\" && git push",
-    "build-deploy":"npm run build:ui && npm run deploy:render"
+    "deploy:render": "git add . && git commit -m \"Deploy from render script\" && git push",
+    "build-deploy": "npm run build:ui && npm run deploy:render"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "express": "^4.18.2",
+    "mongoose": "^7.1.1",
     "morgan": "^1.10.0"
   }
 }
