@@ -113,7 +113,7 @@ const errorHandler = (error, request, response, next) => {
     } else if (error.name === 'ElementNotFoundError') {
         return response.status(404).send({ error: 'Invalid ID: element does not exist' });
     } else if (error.name === 'ValidationError') {
-        return response.status(400).json({error: error.message});
+        return response.status(400).send({error: error.message});
     }
 
     next(error);
